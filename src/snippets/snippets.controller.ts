@@ -20,17 +20,17 @@ export class SnippetsController {
 	}
 
 	@Get(':id')
-	findOne(@Param('id') id: string) {
-		return this.snippetsService.findOne(+id);
+	findById(@Param('id') id: string) {
+		return this.snippetsService.findById(id);
 	}
 
 	@Patch(':id')
 	update(@Param('id') id: string, @Body() updateSnippetDto: UpdateSnippetDto) {
-		return this.snippetsService.update(+id, updateSnippetDto);
+		return this.snippetsService.update(id, updateSnippetDto);
 	}
 
 	@Delete(':id')
 	remove(@Param('id') id: string) {
-		return this.snippetsService.remove(+id);
+		return this.snippetsService.remove(id);
 	}
 }

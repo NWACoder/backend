@@ -13,22 +13,21 @@ export class SnippetsService {
 	async create(createSnippetDto: CreateSnippetDto): Promise<Snippet> {
 		const createdSnippet = new this.snippetModel(createSnippetDto);
     	return createdSnippet.save();
-		// return 'This action adds a new snippet';
 	}
 
-	findAll() {
-		return `This action returns all snippets`;
+	async findAll(): Promise<Snippet[]> {
+		return this.snippetModel.find().exec();
 	}
 
-	findOne(id: number) {
-		return `This action returns a #${id} snippet`;
+	async findById(id: string): Promise<Snippet> {
+		return this.snippetModel.findById(id);
 	}
 
-	update(id: number, updateSnippetDto: UpdateSnippetDto) {
-		return `This action updates a #${id} snippet`;
+	async update(id: string, updateSnippetDto: UpdateSnippetDto): Promise<Snippet> {
+    	return this.snippetModel.findByIdAndUpdate(id,updateSnippetDto, {new: true});
 	}
 
-	remove(id: number) {
-		return `This action removes a #${id} snippet`;
+	async remove(id: string) {
+		return this.snippetModel.findByIdAndDelete(id);
 	}
 }
