@@ -5,6 +5,7 @@ import { SnippetsModule } from './snippets/snippets.module';
 import { MongooseModule } from '@nestjs/mongoose';
 import { UsersModule } from './users/users.module';
 import { ConfigModule, ConfigService } from '@nestjs/config';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
 	imports: [
@@ -19,7 +20,7 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 		inject: [ConfigService],
 	}),
 	SnippetsModule, 
-	UsersModule],
+	UsersModule, AuthModule],
 	controllers: [AppController],
 	providers: [AppService],
 })

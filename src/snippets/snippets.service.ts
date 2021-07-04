@@ -16,7 +16,7 @@ export class SnippetsService {
 	}
 
 	async findAll(): Promise<Snippet[]> {
-		return this.snippetModel.find().exec();
+		return this.snippetModel.find();
 	}
 
 	async findById(id: string): Promise<Snippet> {
