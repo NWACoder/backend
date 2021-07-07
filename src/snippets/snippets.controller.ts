@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, Query } from '@nestjs/common';
 import { SnippetsService } from './snippets.service';
 import { CreateSnippetDto } from './dto/create-snippet.dto';
 import { UpdateSnippetDto } from './dto/update-snippet.dto';
@@ -17,6 +17,11 @@ export class SnippetsController {
 	@Get()
 	findAll() {
 		return this.snippetsService.findAll();
+	}
+	@Get('lastest')
+	getLatest(@Query('size') size: number){
+		console.log(size);
+		return this.snippetsService.getLatest(size);
 	}
 
 	@Get(':id')

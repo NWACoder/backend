@@ -19,6 +19,10 @@ export class SnippetsService {
 		return this.snippetModel.find();
 	}
 
+	async getLatest(size: number): Promise<Snippet[]> {
+		return this.snippetModel.find().limit(+size).sort({$natural:-1});
+	}
+
 	async findById(id: string): Promise<Snippet> {
 		return this.snippetModel.findById(id);
 	}
