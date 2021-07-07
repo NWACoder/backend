@@ -20,7 +20,6 @@ export class SnippetsController {
 	}
 	@Get('lastest')
 	getLatest(@Query('size') size: number){
-		console.log(size);
 		return this.snippetsService.getLatest(size);
 	}
 
