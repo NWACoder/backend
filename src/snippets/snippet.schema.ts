@@ -1,7 +1,7 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Document } from 'mongoose';
-import { User } from '../users/user.schema';
 import * as mongoose from 'mongoose';
+import { Tag } from 'src/tags/tags.schema';
 
 export type SnippetDocument = Snippet & Document;
 
@@ -18,13 +18,13 @@ export class Snippet {
 	title: string;
 
 	@Prop({ type: mongoose.Schema.Types.ObjectId, ref: 'User' })
-	author_id: string; // uuids of author
+	user_id: string; // uuids of author
 
-	@Prop([String])
-	files: string[]; // array of file uuids 
+	@Prop({ type: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Files' }] })
+	files: object[]; // array of file uuids 
 
-	@Prop([String])
-	tags: string[]; // array of tags uuids
+	@Prop({ type: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Tag' }] })
+	tags: Tag[]; // array of tags uuids
 
 	@Prop()
 	public: boolean;

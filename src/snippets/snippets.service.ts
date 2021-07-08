@@ -12,11 +12,12 @@ export class SnippetsService {
 
 	async create(createSnippetDto: CreateSnippetDto): Promise<Snippet> {
 		const createdSnippet = new this.snippetModel(createSnippetDto);
+		
     	return createdSnippet.save();
 	}
 
 	async findAll(): Promise<Snippet[]> {
-		return this.snippetModel.find();
+		return this.snippetModel.find().populate('tags');
 	}
 
 	async getLatest(size: number): Promise<Snippet[]> {
@@ -24,7 +25,7 @@ export class SnippetsService {
 	}
 
 	async findById(id: string): Promise<Snippet> {
-		return this.snippetModel.findById(id);
+		return this.snippetModel.findById(id).populate('user_id', "username");
 	}
 
 	async update(id: string, updateSnippetDto: UpdateSnippetDto): Promise<Snippet> {
