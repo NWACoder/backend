@@ -50,7 +50,17 @@ export class SnippetsController {
 	}
 
 	@Delete(':id')
-	remove(@Param('id') id: string) {
-		return this.snippetsService.remove(id);
+	@UseGuards(JwtAuthGuard)
+	async remove(@Param('id') id: string, @Request() req : any) {
+
+		let currentSnippet = await this.snippetsService.findById(id);
+		
+		if(req.user._id == currentSnippet.user_id.id){
+			return this.snippetsService.remove(id);
+		}else{
+			return "user doesnt have permission to delete snippet"
+		}
+
+		
 	}
 }

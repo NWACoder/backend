@@ -8,6 +8,7 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { AuthModule } from './auth/auth.module';
 import { TagsModule } from './tags/tags.module';
 import { ItemsModule } from './items/items.module';
+import { SiteModule } from './site/site.module';
 
 @Module({
 	imports: [
@@ -22,7 +23,7 @@ import { ItemsModule } from './items/items.module';
 		inject: [ConfigService],
 	}),
 	SnippetsModule, 
-	UsersModule, AuthModule, TagsModule, ItemsModule, ],
+	UsersModule, AuthModule, TagsModule, ItemsModule, SiteModule, ],
 	controllers: [AppController],
 	providers: [AppService],
 })
