@@ -17,11 +17,11 @@ export class SnippetsService {
 	}
 
 	async findAll(): Promise<Snippet[]> {
-		return this.snippetModel.find().populate('tags');
+		return this.snippetModel.find({ public: true}).populate('tags');
 	}
 
 	async getLatest(size: number): Promise<Snippet[]> {
-		return this.snippetModel.find().populate('tags').limit(+size).sort({$natural:-1});
+		return this.snippetModel.find({ public: true}).populate('tags').limit(+size).sort({$natural:-1});
 	}
 
 	async findById(id: string): Promise<Snippet> {
