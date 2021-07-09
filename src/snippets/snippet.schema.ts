@@ -20,8 +20,8 @@ export class Snippet {
 	@Prop({ type: mongoose.Schema.Types.ObjectId, ref: 'User' })
 	user_id: string; // uuids of author
 
-	@Prop({ type: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Files' }] })
-	files: object[]; // array of file uuids 
+	@Prop({ type: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Item' }] })
+	items: object[]; // array of file uuids 
 
 	@Prop({ type: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Tag' }] })
 	tags: Tag[]; // array of tags uuids

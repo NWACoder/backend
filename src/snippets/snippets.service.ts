@@ -21,11 +21,11 @@ export class SnippetsService {
 	}
 
 	async getLatest(size: number): Promise<Snippet[]> {
-		return this.snippetModel.find().limit(+size).sort({$natural:-1});
+		return this.snippetModel.find().populate('tags').limit(+size).sort({$natural:-1});
 	}
 
 	async findById(id: string): Promise<Snippet> {
-		return this.snippetModel.findById(id).populate('user_id', "username");
+		return this.snippetModel.findById(id).populate('user_id', "username").populate('items').populate('tags');
 	}
 
 	async update(id: string, updateSnippetDto: UpdateSnippetDto): Promise<Snippet> {

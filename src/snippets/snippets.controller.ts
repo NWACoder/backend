@@ -18,7 +18,7 @@ export class SnippetsController {
 
 		createSnippetDto.user_id = req.user.id;
 		
-		createSnippetDto.files = await this.itemsService.createMany(createSnippetDto.files)
+		createSnippetDto.items = await this.itemsService.createMany(createSnippetDto.items)
 		
   		return this.snippetsService.create(createSnippetDto);
 	}
