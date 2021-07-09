@@ -13,14 +13,21 @@ export class UsersService {
 	constructor(@InjectModel(User.name) private userModel: Model<UserDocument>) {}
 
 	async create(createUserDto: CreateUserDto) {
-
+		
 		const salt = await bcrypt.genSalt(8,"b");
 		const password = createUserDto.password;
 		const hashpwd = await bcrypt.hash(password, salt);
 		createUserDto.password = hashpwd;
 
 		const createdUser = new this.userModel(createUserDto);
-    	return createdUser.save();
+
+		return createdUser.save().then((user) => {
+			return user
+		})
+    	.catch((error) => {
+       	 	return "Username or Email already used"
+    	});
+
 	}
 
 	findAll() {
