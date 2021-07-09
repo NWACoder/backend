@@ -38,8 +38,15 @@ export class SnippetsController {
 	}
 
 	@Patch(':id')
-	update(@Param('id') id: string, @Body() updateSnippetDto: UpdateSnippetDto) {
-		return this.snippetsService.update(id, updateSnippetDto);
+	@UseGuards(JwtAuthGuard)
+	async update(@Param('id') id: string, @Body() updateSnippetDto: UpdateSnippetDto, @Request() req : any) {
+		let currentSnippet = await this.snippetsService.findById(id);
+		
+		if(req.user._id == currentSnippet.user_id.id){
+			return this.snippetsService.update(id, updateSnippetDto);
+		}else{
+			return "user doesnt have permission to update snippet"
+		}
 	}
 
 	@Delete(':id')

@@ -1,10 +1,11 @@
 import { Tag } from "src/tags/tags.schema"
 import { Item } from "src/items/items.schema"
 import { ApiProperty } from '@nestjs/swagger';
+import { User } from "src/users/user.schema";
 
 export class CreateSnippetDto {
 	@ApiProperty()
-	user_id: string
+	user_id: User
 	@ApiProperty()
 	title: string
 	@ApiProperty()
