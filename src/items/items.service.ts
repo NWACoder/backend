@@ -11,24 +11,33 @@ export class ItemsService {
 	constructor(@InjectModel(Item.name) private itemModel: Model<ItemDocument>) {}
 
 	async create(createItemDto: CreateItemDto) {
-		const createdTag = await new this.itemModel(createItemDto);
+		const createdTag =  new this.itemModel(createItemDto);
 		
 		return createdTag.save();
 	}
 
+	async createMany(createItemDto: CreateItemDto[]): Promise<CreateItemDto[]> {
+		
+		const createdTag =  this.itemModel.insertMany(createItemDto)
+		
+		return createdTag;
+		
+	}
+
 	findAll() {
-	return `This action returns all items`;
+		return `This action returns all items`;
 	}
 
 	findOne(id: number) {
-	return `This action returns a #${id} item`;
+		return `This action returns a #${id} item`;
 	}
 
-	update(id: number, updateItemDto: UpdateItemDto) {
-	return `This action updates a #${id} item`;
+	async update(id: number, updateItemDto: UpdateItemDto): Promise<Item> {
+    	return this.itemModel.findByIdAndUpdate(id,updateItemDto, {new: true});
+
 	}
 
 	remove(id: number) {
-	return `This action removes a #${id} item`;
+		return `This action removes a #${id} item`;
 	}
 }
