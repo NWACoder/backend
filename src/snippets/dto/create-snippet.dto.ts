@@ -4,7 +4,6 @@ import { ApiProperty } from '@nestjs/swagger';
 import { User } from "src/users/user.schema";
 
 export class CreateSnippetDto {
-	@ApiProperty()
 	user_id: User
 	@ApiProperty()
 	title: string
