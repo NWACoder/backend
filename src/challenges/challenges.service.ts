@@ -1,14 +1,14 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
-import { ChallengeDocument } from './challenge.schema';
+import { Challenge, ChallengeDocument } from './challenge.schema';
 import { CreateChallengeDto } from './dto/create-challenge.dto';
 import { UpdateChallengeDto } from './dto/update-challenge.dto';
 
 @Injectable()
 export class ChallengesService {
 
-	constructor(@InjectModel(Tag.name) private challengeModel: Model<ChallengeDocument>) {}
+	constructor(@InjectModel(Challenge.name) private challengeModel: Model<ChallengeDocument>) {}
 
 	create(createChallengeDto: CreateChallengeDto) {
 		const createdChallenge = new this.challengeModel(createChallengeDto);
