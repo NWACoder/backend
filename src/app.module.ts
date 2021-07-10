@@ -10,6 +10,7 @@ import { TagsModule } from './tags/tags.module';
 import { ItemsModule } from './items/items.module';
 import { SiteModule } from './site/site.module';
 import { ChallengesModule } from './challenges/challenges.module';
+import { MailModule } from './mail/mail.module';
 
 @Module({
 	imports: [
@@ -24,7 +25,7 @@ import { ChallengesModule } from './challenges/challenges.module';
 		inject: [ConfigService],
 	}),
 	SnippetsModule, 
-	UsersModule, AuthModule, TagsModule, ItemsModule, SiteModule, ChallengesModule, ],
+	UsersModule, AuthModule, TagsModule, ItemsModule, SiteModule, ChallengesModule, MailModule, ],
 	controllers: [AppController],
 	providers: [AppService],
 })
