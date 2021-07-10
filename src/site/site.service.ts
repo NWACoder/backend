@@ -11,7 +11,7 @@ export class SiteService {
 	constructor(@InjectModel(Site.name) private siteModel: Model<SiteDocument>) {}
 
 	findbyKey(key: string) {
-		 return this.siteModel.find();
+		 return this.siteModel.findOne({ key: key});
 	}
 
 	create(createSiteDto: CreateSiteDto) {
