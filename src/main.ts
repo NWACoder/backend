@@ -6,8 +6,7 @@ import { ConfigService } from '@nestjs/config';
 async function bootstrap() {
 	const app = await NestFactory.create(AppModule);
 	const configService = app.get(ConfigService);
-	app.enableCors();
-
+	app.enableCors({ origin: configService.get('ORIGIN')});
 	const config = new DocumentBuilder()
 	.setTitle('Code Snippet')
 	.setDescription('The code snippet API description')
