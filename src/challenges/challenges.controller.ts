@@ -19,7 +19,7 @@ export class ChallengesController {
 		return this.challengesService.create(createChallengeDto);
 	}
   
-	@Get('lastest')
+	@Get('latest')
 	getLatest(@Query('size') size: number){
     	return this.challengesService.getLatest(size);
     }
@@ -34,11 +34,13 @@ export class ChallengesController {
 		return this.challengesService.findOne(id);
 	}
 
+	@UseGuards(JwtAuthGuard)
 	@Patch(':id')
 	update(@Param('id') id: string, @Body() updateChallengeDto: UpdateChallengeDto) {
 		return this.challengesService.update(id, updateChallengeDto);
 	}
 
+	@UseGuards(JwtAuthGuard)
 	@Delete(':id')
 	remove(@Param('id') id: string) {
 		return this.challengesService.remove(id);

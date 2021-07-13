@@ -27,7 +27,7 @@ export class SnippetsController {
 	findAll() {
 		return this.snippetsService.findAll();
 	}
-	@Get('lastest')
+	@Get('latest')
 	getLatest(@Query('size') size: number){
 		return this.snippetsService.getLatest(size);
 	}

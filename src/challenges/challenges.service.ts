@@ -21,7 +21,7 @@ export class ChallengesService {
 	}
 
 	async findAll() {
-		return this.challengeModel.find().sort({$natural:-1});
+		return this.challengeModel.find().populate('user_id', "username").sort({$natural:-1});
 	}
 
 	async findOne(id: string) {
