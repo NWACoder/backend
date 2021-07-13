@@ -10,25 +10,29 @@ export class ChallengesService {
 
 	constructor(@InjectModel(Challenge.name) private challengeModel: Model<ChallengeDocument>) {}
 
-	create(createChallengeDto: CreateChallengeDto) {
+	async create(createChallengeDto: CreateChallengeDto) {
 		const createdChallenge = new this.challengeModel(createChallengeDto);
 		
 		return createdChallenge.save();
 	}
 
-	findAll() {
-		return this.challengeModel.find();
+	async getLatest(size: number): Promise<Challenge[]> {
+		return this.challengeModel.find().populate('solutions').limit(+size).sort({$natural:-1});
 	}
 
-	findOne(id: number) {
-		return this.challengeModel.findById(id);
+	async findAll() {
+		return this.challengeModel.find().sort({$natural:-1});
 	}
 
-	update(id: number, updateChallengeDto: UpdateChallengeDto) {
+	async findOne(id: string) {
+		return this.challengeModel.findById(id).populate('user_id', "username");
+	}
+
+	async update(id: string, updateChallengeDto: UpdateChallengeDto) {
     	return this.challengeModel.findByIdAndUpdate(id,updateChallengeDto, {new: true});
 	}
 
-	remove(id: number) {
-		return `This action removes a #${id} challenge`;
+	async remove(id: string) {
+		return this.challengeModel.findByIdAndDelete(id);
 	}
 }
