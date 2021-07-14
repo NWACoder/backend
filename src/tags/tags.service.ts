@@ -17,7 +17,7 @@ export class TagsService {
 	}
 
 	findAll() {
-	return `This action returns all tags`;
+		return this.tagModel.find();
 	}
 
 	findOne(id: number) {
@@ -25,10 +25,10 @@ export class TagsService {
 	}
 
 	update(id: number, updateTagDto: UpdateTagDto) {
-	return `This action updates a #${id} tag`;
+		return `This action updates a #${id} tag`;
 	}
 
 	remove(id: number) {
-	return `This action removes a #${id} tag`;
+		return `This action removes a #${id} tag`;
 	}
 }
