@@ -3,7 +3,8 @@ import { CreateSnippetDto } from './dto/create-snippet.dto';
 import { UpdateSnippetDto } from './dto/update-snippet.dto';
 import { Snippet, SnippetDocument } from './snippet.schema';
 import { InjectModel } from '@nestjs/mongoose';
-import { Model } from 'mongoose';
+import { Model, ObjectId } from 'mongoose';
+import { User } from 'src/users/user.schema';
 
 @Injectable()
 export class SnippetsService {
@@ -19,6 +20,12 @@ export class SnippetsService {
 	async findAll(): Promise<Snippet[]> {
 		return this.snippetModel.find({ public: true}).populate('tags');
 	}
+
+	async findByUser(user_id: User): Promise<Snippet[]> {
+		return this.snippetModel.find({ user_id }).populate('tags');
+	}
+
+
 
 	async getLatest(size: number): Promise<Snippet[]> {
 		return this.snippetModel.find({ public: true}).populate('tags').limit(+size).sort({$natural:-1});

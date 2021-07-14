@@ -27,6 +27,13 @@ export class SnippetsController {
 	findAll() {
 		return this.snippetsService.findAll();
 	}
+
+	@Get('user')
+	@UseGuards(JwtAuthGuard)
+	findByUser(@Request() req) {
+		return this.snippetsService.findByUser(req.user.id);
+	}
+
 	@Get('latest')
 	getLatest(@Query('size') size: number){
 		return this.snippetsService.getLatest(size);
