@@ -4,6 +4,7 @@ import * as mongoose from 'mongoose';
 import { Tag } from 'src/tags/tags.schema';
 import { User } from 'src/users/user.schema';
 import { Item } from 'src/items/items.schema';
+import { Stats } from './dto/Stats.dto';
 
 export type SnippetDocument = Snippet & Document;
 
@@ -29,8 +30,12 @@ export class Snippet {
 	tags: Tag[]; // array of tags uuids
 
 	@Prop()
+	stats: Stats
+
+	@Prop()
 	public: boolean;
 
 }
 
 export const SnippetSchema = SchemaFactory.createForClass(Snippet);
+

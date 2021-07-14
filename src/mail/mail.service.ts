@@ -5,7 +5,7 @@ import { Injectable } from '@nestjs/common';
 export class MailService {
 	constructor(private readonly mailerService: MailerService) {}
 
-	public example(): void {
+	example(): void {
 		this.mailerService
 		.sendMail({
 			to: 'test@codeparcel.io',
@@ -25,5 +25,24 @@ export class MailService {
 		});
 	}
 
+	confirmUserEmail(username: string, code: string): void {
+		this.mailerService
+		.sendMail({
+			to: 'test@codeparcel.io',
+			from: 'noreply@codeparcel.io',
+			subject: 'confirm email from Code Parcel',
+			template:  './confirmEmail',
+			context: {
+				username: username,
+				code: code,
+			},
+		})
+		.then(() => {
+			console.log("successful")
+		})
+		.catch((error) => {
+			console.log(error)
+		});
+	}
 
 }

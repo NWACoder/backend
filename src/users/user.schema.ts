@@ -15,7 +15,7 @@ export class User {
 	@Prop({unique: true})
 	username: string;
 
-	@Prop()
+	@Prop({select: false})
 	password: string;
 
 	@Prop()
