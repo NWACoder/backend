@@ -38,6 +38,10 @@ export class UsersService {
 		return this.userModel.findOne({username: username});
 	}
 
+	async login(username: string): Promise<User | undefined> {
+		return this.userModel.findOne({username: username}).select("+password");
+	}
+
 	update(id: string, updateUserDto: UpdateUserDto): string {
 		return `This action updates a #${id} user`;
 	}
