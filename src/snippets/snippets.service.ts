@@ -25,8 +25,6 @@ export class SnippetsService {
 		return this.snippetModel.find({ user_id }).populate('tags');
 	}
 
-
-
 	async getLatest(size: number): Promise<Snippet[]> {
 		return this.snippetModel.find({ public: true}).populate('tags').limit(+size).sort({$natural:-1});
 	}
