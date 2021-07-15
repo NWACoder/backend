@@ -16,7 +16,6 @@ export class UsersController {
 
 	@Get('profile/:username')
 	findOne(@Param('username') username: string) {
-		console.log(username);
 		return this.usersService.findOne(username);
 	}
 

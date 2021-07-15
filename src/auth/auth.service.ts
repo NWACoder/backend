@@ -33,7 +33,15 @@ export class AuthService {
 	}
 
 	async register(createUserDto: CreateUserDto) {
-		return this.usersService.create(createUserDto);
+		const user = await this.usersService.create(createUserDto);
+		
+		if(typeof(user) == "string"){
+			return user
+		}
+
+		const payload = { username: user.username, sub: user._id };
+
+		return {access_token: this.jwtService.sign(payload)};
 	}
 
 }
