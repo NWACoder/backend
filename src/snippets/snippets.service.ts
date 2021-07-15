@@ -18,7 +18,7 @@ export class SnippetsService {
 	}
 
 	async findAll(): Promise<Snippet[]> {
-		return this.snippetModel.find({ public: true}).populate('tags');
+		return this.snippetModel.find({ public: true}).populate('user_id', 'username').populate('tags');
 	}
 
 	async findByUser(user_id: User): Promise<Snippet[]> {
@@ -30,7 +30,7 @@ export class SnippetsService {
 	  }
 
 	async getLatest(size: number): Promise<Snippet[]> {
-		return this.snippetModel.find({ public: true}).populate('tags').limit(+size).sort({$natural:-1});
+		return this.snippetModel.find({ public: true}).populate('user_id', 'username').populate('tags').limit(+size).sort({$natural:-1});
 	}
 
 	async findById(id: string): Promise<Snippet> {
