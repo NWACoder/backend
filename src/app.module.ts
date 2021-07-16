@@ -21,7 +21,7 @@ import { MailModule } from './mail/mail.module';
 		imports: [ConfigModule],
 		useFactory: async (configService: ConfigService) => ({
 			uri: configService.get<string>('DATABASE_URL'),
-			tlsCAFile: configService.get<string>('CA_CERT') || "",
+			tlsCAFile: `${__dirname}/ca-certificate.cer`,
 		}),
 		inject: [ConfigService],
 	}),
