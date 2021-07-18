@@ -32,6 +32,10 @@ export class ChallengesService {
     	return this.challengeModel.findByIdAndUpdate(id,updateChallengeDto, {new: true});
 	}
 
+	async getCount(){
+		return this.challengeModel.estimatedDocumentCount();
+	}
+
 	async remove(id: string) {
 		return this.challengeModel.findByIdAndDelete(id);
 	}

@@ -46,7 +46,7 @@ export class UsersService {
 		return `This action updates a #${id} user`;
 	}
 	async getCount(){
-		return this.userModel.count();
+		return this.userModel.estimatedDocumentCount();
 	}
 
 	remove(id: string) {

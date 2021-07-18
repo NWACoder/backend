@@ -6,7 +6,7 @@ import { Site, SiteDocument } from './site.schema';
 import { Cron } from '@nestjs/schedule';
 import { UsersService } from 'src/users/users.service';
 import { SnippetsService } from 'src/snippets/snippets.service';
-
+import { ChallengesService } from 'src/challenges/challenges.service';
 
 @Injectable()
 export class SiteService {
@@ -14,7 +14,9 @@ export class SiteService {
 
 	constructor(@InjectModel(Site.name) private siteModel: Model<SiteDocument>,
 		private readonly usersService: UsersService,
-		private readonly snippetsService: SnippetsService
+		private readonly snippetsService: SnippetsService,
+		private readonly challengesService: ChallengesService
+
 		) {}
 
 	findbyKey(key: string) {
@@ -38,9 +40,8 @@ export class SiteService {
 
 		cStat.value ={
 			Users: await this.usersService.getCount(),
-			// Snippets: 22,
 			Snippets: await this.snippetsService.getCount(),
-			Challenges: 0
+			Challenges: await this.challengesService.getCount()
 		}
 
 		cStat.save()

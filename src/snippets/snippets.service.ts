@@ -41,7 +41,7 @@ export class SnippetsService {
     	return this.snippetModel.findByIdAndUpdate(id,updateSnippetDto, {new: true});
 	}
 	async getCount(){
-		return this.snippetModel.count();
+		return this.snippetModel.estimatedDocumentCount();
 	}
 	
 	async remove(id: string) {
