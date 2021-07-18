@@ -15,10 +15,10 @@ export class SiteController {
 		return this.siteService.findbyKey(key);
 	}
 
-	@Post()
-	create(@Body() createSiteDto: CreateSiteDto) {
-		return this.siteService.create(createSiteDto);
-	}
+	// @Post()
+	// create(@Body() createSiteDto: CreateSiteDto) {
+	// 	return this.siteService.create(createSiteDto);
+	// }
 
   	@Get()
 	findAll() {

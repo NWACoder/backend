@@ -40,7 +40,10 @@ export class SnippetsService {
 	async update(id: string, updateSnippetDto: UpdateSnippetDto): Promise<Snippet> {
     	return this.snippetModel.findByIdAndUpdate(id,updateSnippetDto, {new: true});
 	}
-
+	async getCount(){
+		return this.snippetModel.count();
+	}
+	
 	async remove(id: string) {
 		return this.snippetModel.findByIdAndDelete(id);
 	}

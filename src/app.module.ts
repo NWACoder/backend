@@ -11,9 +11,11 @@ import { ItemsModule } from './items/items.module';
 import { SiteModule } from './site/site.module';
 import { ChallengesModule } from './challenges/challenges.module';
 import { MailModule } from './mail/mail.module';
+import { ScheduleModule } from '@nestjs/schedule';
 
 @Module({
 	imports: [
+	ScheduleModule.forRoot(),
 	ConfigModule
 	.forRoot({isGlobal: true}),
 	MongooseModule

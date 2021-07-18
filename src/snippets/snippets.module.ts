@@ -12,6 +12,7 @@ import { ItemsService } from 'src/items/items.service';
 	MongooseModule.forFeature([{ name: Item.name, schema: ItemSchema }]),
 	],
 	controllers: [SnippetsController],
-	providers: [SnippetsService, ItemsService]
+	providers: [SnippetsService, ItemsService],
+	exports: [SnippetsService]
 })
 export class SnippetsModule {}

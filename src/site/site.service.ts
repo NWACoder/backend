@@ -1,14 +1,21 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, Logger } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { CreateSiteDto } from './dto/create-site.dto';
-import { UpdateSiteDto } from './dto/update-site.dto';
 import { Site, SiteDocument } from './site.schema';
+import { Cron } from '@nestjs/schedule';
+import { UsersService } from 'src/users/users.service';
+import { SnippetsService } from 'src/snippets/snippets.service';
+
 
 @Injectable()
 export class SiteService {
+	private readonly logger = new Logger(Site.name);
 
-	constructor(@InjectModel(Site.name) private siteModel: Model<SiteDocument>) {}
+	constructor(@InjectModel(Site.name) private siteModel: Model<SiteDocument>,
+		private readonly usersService: UsersService,
+		private readonly snippetsService: SnippetsService
+		) {}
 
 	findbyKey(key: string) {
 		 return this.siteModel.findOne({ key: key});
@@ -22,6 +29,23 @@ export class SiteService {
 
 	findAll() {
 		return this.siteModel.find();
+	}
+
+	@Cron('0 10 * * * *')
+	async updateStatsCron() {
+		
+		let cStat = await this.siteModel.findOne({ key: "community-stats"})
+
+		cStat.value ={
+			Users: await this.usersService.getCount(),
+			// Snippets: 22,
+			Snippets: await this.snippetsService.getCount(),
+			Challenges: 0
+		}
+
+		cStat.save()
+
+    	this.logger.debug('Called when the current second is 45');
 	}
 
 	// findOne(id: number) {

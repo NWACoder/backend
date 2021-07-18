@@ -45,6 +45,9 @@ export class UsersService {
 	update(id: string, updateUserDto: UpdateUserDto): string {
 		return `This action updates a #${id} user`;
 	}
+	async getCount(){
+		return this.userModel.count();
+	}
 
 	remove(id: string) {
 		return this.userModel.findByIdAndDelete(id);
