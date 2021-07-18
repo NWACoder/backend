@@ -29,6 +29,11 @@ export class ChallengesController {
 		return this.challengesService.findAll();
 	}
 
+	@Get('search')
+	search(@Query('query') query: string){
+		return this.challengesService.search(query);
+	}
+	
 	@Get(':id')
 	findOne(@Param('id') id: string) {
 		return this.challengesService.findOne(id);
