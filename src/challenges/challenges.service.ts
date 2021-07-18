@@ -24,8 +24,8 @@ export class ChallengesService {
 		return this.challengeModel.find().populate('user_id', "username").sort({$natural:-1});
 	}
 
-	async search(query: string): Promise<Snippet[]> {
-		return this.snippetModel.find({ public: true, "name": { "$regex": query, "$options": "i" } }).populate('user_id', 'username').populate('tags');
+	async search(query: string): Promise<Challenge[]> {
+		return this.challengeModel.find({ public: true, "name": { "$regex": query, "$options": "i" } }).populate('user_id', 'username').populate('tags');
 	}
 
 	async findOne(id: string) {
