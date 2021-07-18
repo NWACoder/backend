@@ -34,6 +34,11 @@ export class SnippetsController {
 		return this.snippetsService.findByUser(req.user.id);
 	}
 
+	@Get('search')
+	search(@Query('query') query: string){
+		return this.snippetsService.search(query);
+	}
+
 	@Get('latest')
 	getLatest(@Query('size') size: number){
 		return this.snippetsService.getLatest(size);

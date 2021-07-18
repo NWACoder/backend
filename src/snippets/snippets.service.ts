@@ -21,13 +21,16 @@ export class SnippetsService {
 		return this.snippetModel.find({ public: true}).populate('user_id', 'username').populate('tags');
 	}
 
+	async search(query: string): Promise<Snippet[]> {
+		return this.snippetModel.find({ public: true, "title": { "$regex": query, "$options": "i" } }).populate('user_id', 'username').populate('tags');
+	}
 	async findByUser(user_id: User): Promise<Snippet[]> {
 		return this.snippetModel
 		  .find({ user_id })
 		  .populate('tags')
 		  .populate('user_id', 'username')
 		  .populate('items', 'name');
-	  }
+	}
 
 	async getLatest(size: number): Promise<Snippet[]> {
 		return this.snippetModel.find({ public: true}).populate('user_id', 'username').populate('tags').limit(+size).sort({$natural:-1});
