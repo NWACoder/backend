@@ -8,6 +8,9 @@ NWA Coders - Code Snippets
 $ npm install
 ```
 
+```bash
+$ cp .env.example .env
+```
 ## Running the app
 
 ```bash
@@ -23,10 +26,11 @@ $ npm run start:prod
 
 ## Running the app dev tools
 
-[API Document Endpoints](http://localhost:3000/api).
+[Local API Document Endpoints](http://localhost:3000/api).
 
 Generate a resource 
 
 ```bash
 $ nest g resource
 ```
+
