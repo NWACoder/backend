@@ -25,7 +25,7 @@ export class ChallengesService {
 	}
 
 	async search(query: string): Promise<Challenge[]> {
-		return this.challengeModel.find({ public: true, "name": { "$regex": query, "$options": "i" } }).populate('user_id', 'username').populate('tags');
+		return this.challengeModel.find({ "name": { "$regex": query, "$options": "i" } }).populate('user_id', 'username').populate('tags');
 	}
 
 	async findOne(id: string) {
