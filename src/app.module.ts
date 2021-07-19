@@ -21,10 +21,16 @@ import { ScheduleModule } from '@nestjs/schedule';
 	MongooseModule
 	.forRootAsync({
 		imports: [ConfigModule],
-		useFactory: async (configService: ConfigService) => ({
-			uri: configService.get<string>('DATABASE_URL'),
-			tlsCAFile: `${__dirname}/ca-certificate.cer`,
-		}),
+		useFactory: async (configService: ConfigService) => {
+			if(configService.get<string>('NODE_ENV') == "local"){
+				return { uri: configService.get<string>('DATABASE_URL') }
+			}else{
+				return { 
+					uri: configService.get<string>('DATABASE_URL'),
+					tlsCAFile: `${__dirname}/ca-certificate.cer` 
+				}
+			}
+		},
 		inject: [ConfigService],
 	}),
 	SnippetsModule, 
