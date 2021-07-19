@@ -34,3 +34,7 @@ Generate a resource
 $ nest g resource
 ```
 
+
+##  License
+
+[MIT License](https://choosealicense.com/licenses/mit/).
