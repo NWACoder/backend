@@ -28,16 +28,16 @@ export class ItemsService {
 		return `This action returns all items`;
 	}
 
-	findOne(id: number) {
+	findOne(id: string) {
 		return `This action returns a #${id} item`;
 	}
 
-	async update(id: number, updateItemDto: UpdateItemDto): Promise<Item> {
+	async update(id: string, updateItemDto: UpdateItemDto): Promise<Item> {
     	return this.itemModel.findByIdAndUpdate(id,updateItemDto, {new: true});
 
 	}
 
-	remove(id: number) {
-		return `This action removes a #${id} item`;
+	remove(id: string) {
+    	return this.itemModel.findByIdAndRemove(id)
 	}
 }

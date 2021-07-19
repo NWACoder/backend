@@ -41,7 +41,7 @@ export class SnippetsService {
 	}
 
 	async update(id: string, updateSnippetDto: UpdateSnippetDto): Promise<Snippet> {
-    	return this.snippetModel.findByIdAndUpdate(id,updateSnippetDto, {new: true});
+    	return this.snippetModel.findByIdAndUpdate(id,updateSnippetDto, {new: true}).populate('items');
 	}
 	async getCount(){
 		return this.snippetModel.estimatedDocumentCount();
