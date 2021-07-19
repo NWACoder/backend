@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
+import { User } from 'src/users/user.schema';
 import { Challenge, ChallengeDocument } from './challenge.schema';
 import { CreateChallengeDto } from './dto/create-challenge.dto';
 import { UpdateChallengeDto } from './dto/update-challenge.dto';
@@ -22,6 +23,12 @@ export class ChallengesService {
 
 	async findAll() {
 		return this.challengeModel.find().populate('user_id', "username").sort({$natural:-1});
+	}
+
+	async findByUser(user_id: User): Promise<Challenge[]> {
+		return this.challengeModel
+		  .find({ user_id })
+		  .populate('user_id', 'username');
 	}
 
 	async search(query: string): Promise<Challenge[]> {

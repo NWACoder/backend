@@ -29,6 +29,13 @@ export class ChallengesController {
 		return this.challengesService.findAll();
 	}
 
+	@Get('user')
+	@UseGuards(JwtAuthGuard)
+	findByUser(@Request() req) {
+		return this.challengesService.findByUser(req.user.id);
+	}
+	
+
 	@Get('search')
 	search(@Query('query') query: string){
 		return this.challengesService.search(query);
