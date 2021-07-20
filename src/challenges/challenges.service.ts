@@ -36,7 +36,7 @@ export class ChallengesService {
 	}
 
 	async findOne(id: string) {
-		return this.challengeModel.findById(id).populate('user_id', "username");
+		return this.challengeModel.findById(id).populate('user_id', "username").populate('solutions');
 	}
 
 	async update(id: string, updateChallengeDto: UpdateChallengeDto) {
