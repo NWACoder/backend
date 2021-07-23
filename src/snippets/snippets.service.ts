@@ -18,7 +18,7 @@ export class SnippetsService {
 	}
 
 	async findAll(): Promise<Snippet[]> {
-		return this.snippetModel.find({ public: true}).populate('user_id', 'username').populate('tags');
+		return this.snippetModel.find({ public: true}).populate('user_id', 'username').populate('tags').sort({$natural:-1});
 	}
 
 	async search(query: string): Promise<Snippet[]> {
